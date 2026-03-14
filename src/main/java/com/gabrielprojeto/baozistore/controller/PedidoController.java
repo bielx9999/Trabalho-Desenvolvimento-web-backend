@@ -26,18 +26,17 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pedido> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Pedido> buscarPorId(@PathVariable("id") Long id) {
         return repository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
         if (!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         repository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
+        return ResponseEntity.noContent().build();}
 }
